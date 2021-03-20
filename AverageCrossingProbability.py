@@ -6,7 +6,7 @@ import numpy as num
 #####  INPUT  ##########################################################################
 
 # number of Interfaces
-num_interfcace= 20
+num_interface= 20
 # probability that crossing with first interface is in region A
 pA= 0.00001
 # probability that if you are in region A or B on interface i you reach interface i+1
@@ -19,7 +19,7 @@ mcycle= 10
 
 # save info
 NAMES = ["number of intergace:               ", "initial probability in A region: ", "probability of jumping from A:   ", "probability of jumping from B:   ", "number of Random numbers:      ", "Cycle number :                  "]
-FLOATS = [num_interfcace, pA, pAjump, pBjump, ncycle, mcycle]
+FLOATS = [num_interface, pA, pAjump, pBjump, ncycle, mcycle]
 DAT =  num.column_stack((NAMES, FLOATS))
 num.savetxt('info.txt', DAT, delimiter=" ", fmt="%s")
 #### END INPUT ##########################################################################
@@ -96,23 +96,23 @@ def RAND2(ncycle,pA,interf,NA,NB,pInA,pInB,pAjump,pBjump,pCross):
 while (count < mcycle):
     j=0
     # number for points in region A and B
-    NA=np.zeros([num_interfcace])
-    NB=np.zeros([num_interfcace])
+    NA=np.zeros([num_interface])
+    NB=np.zeros([num_interface])
     # build list for region A and B
     ListA=[]
     ListB=[]
     # probability of being in A and B
-    pInA=np.zeros([num_interfcace])
-    pInB=np.zeros([num_interfcace])
+    pInA=np.zeros([num_interface])
+    pInB=np.zeros([num_interface])
     # crossing probability
-    pCross=np.zeros([num_interfcace])
+    pCross=np.zeros([num_interface])
     pCrossCons = 1
     # overall crossing probability
     pCrossTot =1
     pA=setBackToInitialpA
     print "********************************************************"
     print "************************ INPUT *************************"
-    print "number of Interfaces: ", num_interfcace
+    print "number of Interfaces: ", num_interface
     print "initial probability in A region: ", pA
     print "probability of jumping from A: ", pAjump
     print "probability of jumping from B: ", pBjump
@@ -120,7 +120,7 @@ while (count < mcycle):
     print "********************** END INPUT ***********************"
     print "********************************************************"
     # probability for each interface
-    for interf in xrange (num_interfcace):
+    for interf in xrange (num_interface):
         # initial run to find probability in A and B
         if interf == 0:
             print "Interface number: ", interf
@@ -135,7 +135,7 @@ while (count < mcycle):
             RAND2(ncycle,pA,interf,NA,NB,pInA,pInB,pAjump,pBjump,pCross)
 
     # total crossing proability
-    for n in xrange(num_interfcace):      
+    for n in xrange(num_interface):      
         pCrossTot= pCrossCons * pCross[n]
         pCrossCons = pCrossTot
 
